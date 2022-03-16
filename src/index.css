@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.Admin {
+  height: 100vh;
+  padding: 30px 100px;
+}
+.default-btn,
+default-btn:focus {
+  outline: none;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.default-btn:active {
+  outline: none;
+  background: transparent;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.Fade-away {
+  animation: 2s fadeOut;
+}
+.Clickable {
+  cursor: pointer;
+}
+.admin-tab-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #f1f1f1;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+}
+.bloc-tabs {
+  display: flex;
+}
+.tabs {
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  background: rgba(128, 128, 128, 0.075);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+}
+.tabs:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.active-tabs {
+  background: white;
+  border-bottom: 1px solid transparent;
+}
+
+.active-tabs::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 5px;
+  background: rgb(88, 147, 241);
+}
+.tab-button {
+  border: none;
+}
+.content-tabs {
+  flex-grow: 1;
+}
+.tab-content {
+  background: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.tab-content h2 {
+  padding: 0px 0 5px 0px;
+}
+.tab-content hr {
+  width: 100px;
+  height: 2px;
+  background: #222;
+  margin-bottom: 5px;
+}
+
+.active-content {
+  display: block;
+}
+.Admin-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.table-styling {
+  width: 100%;
+  border: 1px solid black;
+}
+.table-styling tr,
+th {
+  border: 1px solid black;
+  align-items: center;
+}
+
+.orders-Table {
+  color: black;
+  font-size: 14px;
+}
+.orders-Table thead th {
+  width: 100px;
+  text-align: left;
+  height: auto;
+}
