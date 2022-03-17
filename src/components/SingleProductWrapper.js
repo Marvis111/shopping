@@ -2,7 +2,6 @@ import React from "react";
 import {  Link, useNavigate } from "react-router-dom";
 function SingleProductWrapper({ Product }) {
  // const navigate = useNavigate();
-  console.log(Product);
   const PriceAfterDiscount = Product.price * (1 - Product.discount / 100);
   return (
     <div className="col-12 col-sm-6 col-lg-4">
@@ -24,7 +23,7 @@ function SingleProductWrapper({ Product }) {
           </div>
         </div>
         <div className="product-description">
-          <span>{Product.brnad}</span>
+          <span>{Product.brand}</span>
         
             <h6>{Product.Title}</h6>
       
@@ -37,12 +36,7 @@ function SingleProductWrapper({ Product }) {
 
           <div className="hover-content">
             <div className="add-to-cart-btn">
-              <a
-                className="btn essence-btn"
-             //   onClick={(Product) => NavigationHandler(Product)}
-              >
-                <Link to={`/Product/${Product.id}`}>View the Product</Link>
-              </a>
+                <Link to={`/Product/${Product.id}`} className="btn essence-btn">View the Product</Link>
             </div>
           </div>
         </div>

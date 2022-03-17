@@ -1,12 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useReducer } from "react";
 import { ProductContext } from "../Store/ProductContext";
 import SingleProductWrapper from "../components/SingleProductWrapper";
 import SubNavBar from "../Layout/SubNavBar";
-
-function Shop() {
-  const { Products } = useContext(ProductContext);
-
-  const [Items, setItems] = useState(Products);
+import { fetchAllProducts } from "../actions";
+import { connect } from "react-redux";
+import axios from "../axios/axios";
+function Shop(props) {
+ // const { Products } = useContext(ProductContext);
+  //redux hooks...
+  const {Products} = props.allProducts;
+  let AllItems = Products
+  const [Items, setItems] = useState(AllItems);
   const MinPrice = Math.min(...Items.map((item) => item.price));
   const MaxPrice = Math.max(...Items.map((item) => item.price));
 
@@ -30,9 +34,25 @@ function Shop() {
   const FilterByCategory = (Category) => {
     const NewItems = Products.filter((item) => item.Category === Category);
     setItems(NewItems);
+
   };
 
-  useEffect(() => {}, [Items]);
+  useEffect(() => {
+
+   function AllProducts(){
+    axios.get('/products')
+    .then(allProducts =>{
+        props.fetchAllProducts(allProducts.data)
+    }).catch(error =>{
+        props.fetchAllProducts([]);
+    })
+   }
+   
+   AllProducts();
+
+   console.log(props);
+   console.log(Items)
+  }, [Items]);
   return (
     <>
       <SubNavBar />
@@ -315,7 +335,7 @@ function Shop() {
                 {/* The products container */}
                 <div className="row">
                   {Items.map((item) => (
-                    <SingleProductWrapper Product={item} key={item.id} />
+                    <SingleProductWrapper Product={item} key={item._id} />
                   ))}
                 </div>
                 {/* End of The products container */}
@@ -329,4 +349,9 @@ function Shop() {
   );
 }
 
-export default Shop;
+const mapStateToProps = ({allProducts}) =>({
+    allProducts
+})
+export default connect(mapStateToProps,{
+  fetchAllProducts
+})(Shop);
