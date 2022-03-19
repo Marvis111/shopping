@@ -1,43 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ProductContext } from "../Store/ProductContext";
+import { initialProductState } from "../constants/initStates";
+//import { ProductContext } from "../Store/ProductContext";
 function Product() {
+  const {Products} = useSelector(({allProducts})=> allProducts);
   // Item: FrontImage, BackImage, [ Array of other images ], Name, Title, Brand, Price, Discount, Description, [Sizes], [Colors],
-  const { AddAnItemToTheCart, Products } = useContext(ProductContext);
-  const { productID } = useParams(),
-  itemID = parseInt(productID);
-  const [item, setItem] = useState({
-    id: "",
-    brand: "",
-    Gender: "",
-    Category: "",
-    Title: "",
-    Description: "",
-    price: 0,
-    discount: 0,
-    img: {
-      Front: "",
-      Hover: "",
-      Other: [],
-    },
-    Size: [],
-    Colors: [],
-  });
+  //const { AddAnItemToTheCart, Products } = useContext(ProductContext);
+  const { productID } = useParams();
+  
+  const [item, setItem] = useState(initialProductState);
 
   useEffect(() => {
-    const CurrentItemID = itemID;
-    const searchedProduct = Products.filter((item) => item.id === CurrentItemID);
-    setItem(searchedProduct[0]);
-    console.log(item)
-  }, [itemID, Products]);
+    const thisProduct = Products.filter(product => product._id === productID);
+    setItem(thisProduct[0]);
+  }, [Products]);
   return (
-    <>
+    <>  
       <section className="single_product_details_area d-flex align-items-center">
         <div className="single_product_thumb clearfix">
           <div className="product_thumbnail_slides owl-carousel">
             {item['img'].Other.map((elem) => (
               <img
-                src={elem}
+                src={`assets/img/product-img/b1.jpg`}
+
                 alt={item.brand}
                 key={item['img'].Other.indexOf(elem)}
               />
@@ -53,7 +39,10 @@ function Product() {
             <span className="old-price">${item.price}</span> ${item.price - item.discount/100 * item.price}
           </p>
           <p className="product-desc">{item.Description}</p>
-          <form className="cart-form clearfix" method="post">
+          <form className="cart-form clearfix" method="post" onSubmit = {(e)=>{
+            e.preventDefault();
+            
+          }}>
             <div className="select-box d-flex mt-50 mb-30">
               <select name="select" id="productSize" className="mr-5">
                 <option value="value">Size: XL</option>

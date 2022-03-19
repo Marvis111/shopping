@@ -1,32 +1,19 @@
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Contact from "./Pages/Contact";
-import Home from "./Pages/Home";
 import Navbar from "./Layout/Navbar";
 import Footer from "./Layout/Footer";
-import Checkout from "./Pages/Checkout";
-import Shop from "./Pages/Shop";
-import Admin from "./Pages/Admin";
-import ProductsContext from "./Store/ProductContext";
-import Testing from "./Pages/Testing";
-import Product from "./Pages/Product";
-import Error from "./Pages/Error";
+import Home from './Pages/Home';
+import Shop from './Pages/Shop'
+import Product from './Pages/Product'
 function App() {
   return (
     <BrowserRouter>
-      <ProductsContext>
         <Navbar />
-          <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Shop" element={<Shop />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path={`/Product/:productID`} element={<Product />} />
-          <Route path="/CheckOut" element={<Checkout />} />
-          <Route path="/Admin" element={<Admin />} />
-          <Route path="/Testing" element={<Testing />} />
-          <Route path="*" element={<Error />} />
-          </Routes>
+        <Routes>
+        <Route exact path={'/'} element={<Home/>} />
+        <Route exact path={'/Shop'} element = {<Shop/>} />
+        <Route exact path={'/Product/:productID'} element = {<Product/>} />
+        </Routes>
         <Footer />
-      </ProductsContext>
     </BrowserRouter>
   );
 }

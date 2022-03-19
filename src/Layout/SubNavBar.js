@@ -4,7 +4,7 @@ function SubNavBar() {
   return (
     <div
       className="breadcumb_area bg-img"
-      style={{ backgroundImage: `url("assets/img/bg-img/breadcumb.jpg")` }}
+      style={{ backgroundImage: `url("../assets/img/bg-img/breadcumb.jpg")` }}
     >
       <div className="container h-100">
         <div className="row h-100 align-items-center">

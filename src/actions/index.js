@@ -3,9 +3,9 @@ import { ALLPRODUCTS,LOADINGPRODUCTS,PRODUCTLOADINGERROR } from "./actionType";
 
 
 export const fetchAllProducts =  (allProducts) => {
-    return {
+    return{
         type:ALLPRODUCTS,
-        payload:allProducts
+        payload:allProducts.data
     }
 }
 

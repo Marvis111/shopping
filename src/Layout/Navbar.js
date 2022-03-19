@@ -1,9 +1,9 @@
-import { React, useContext, useState } from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import { ProductContext } from "../Store/ProductContext";
-import SideCart from "../Layout/SideCart";
+//import { ProductContext } from "../Store/ProductContext";
+import SideCart from "./SideCart";
 function Header() {
-  const { Cart } = useContext(ProductContext);
+  //const { Cart } = useContext(ProductContext);
   return (
     <>
       <header className="header_area">
@@ -120,26 +120,26 @@ function Header() {
 
             <div className="favourite-area">
               <Link to="/WishList">
-                <img src="assets/img/core-img/heart.svg" alt="WishList" />
+                <img src="../assets/img/core-img/heart.svg" alt="WishList" />
               </Link>
             </div>
 
             <div className="user-login-info">
               <Link to="Login">
-                <img src="assets/img/core-img/user.svg" alt="Login" />
+                <img src="../assets/img/core-img/user.svg" alt="Login" />
               </Link>
             </div>
 
             <div className="cart-area">
               <a id="essenceCartBtn">
-                <img src="assets/img/core-img/bag.svg" alt="ShoppingCart" />{" "}
-                <span>{Cart.length}</span>
+                <img src="../assets/img/core-img/bag.svg" alt="ShoppingCart" />{" "}
+                <span>{5}</span>
               </a>
             </div>
           </div>
         </div>
       </header>
-      <SideCart items={Cart} />
+     {/* <SideCart items={Cart} /> */}
     </>
   );
 }

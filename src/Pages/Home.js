@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import HomeProductWrapper from "../components/HomeProductWrapper";
-import SingleProductWrapper from "../components/SingleProductWrapper";
-import { ProductContext } from "../Store/ProductContext";
-import Products from "../TestingData/Products";
+//import HomeProductWrapper from "../components/HomeProductWrapper";
+//import SingleProductWrapper from "../components/SingleProductWrapper";
+//import { ProductContext } from "../Store/ProductContext";
+//import Products from "../TestingData/Products";
 function Home() {
-  const { HomeProducts } = useContext(ProductContext);
+  //const { HomeProducts } = useContext(ProductContext);
   return (
     <>
       {/* Collections section*/}
@@ -105,9 +105,9 @@ function Home() {
           <div className="row">
             <div className="col-12">
               <div className="popular-products-slides owl-carousel">
+                {/*<HomeProductWrapper Product={Products[0]} />
                 <HomeProductWrapper Product={Products[0]} />
-                <HomeProductWrapper Product={Products[0]} />
-                <HomeProductWrapper Product={Products[0]} />
+  <HomeProductWrapper Product={Products[0]} /> */}
               </div>
             </div>
           </div>

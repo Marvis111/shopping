@@ -1,58 +1,26 @@
-import React, { useContext, useState, useEffect, useReducer } from "react";
-import { ProductContext } from "../Store/ProductContext";
-import SingleProductWrapper from "../components/SingleProductWrapper";
+import React, { useEffect,} from "react";
 import SubNavBar from "../Layout/SubNavBar";
 import { fetchAllProducts } from "../actions";
-import { connect } from "react-redux";
+import { connect, } from "react-redux";
 import axios from "../axios/axios";
-function Shop(props) {
- // const { Products } = useContext(ProductContext);
-  //redux hooks...
-  const {Products} = props.allProducts;
-  let AllItems = Products
-  const [Items, setItems] = useState(AllItems);
-  const MinPrice = Math.min(...Items.map((item) => item.price));
-  const MaxPrice = Math.max(...Items.map((item) => item.price));
-
-  //Sorting the items
-  const SortByLowest = () => {
-    const newItems = Items.sort((a, b) =>
-      a.price * (1 - a.discount / 100) > b.price * (1 - a.discount / 100)
-        ? 1
-        : -1
-    );
-    setItems(newItems);
-  };
-  const SortByHighest = () => {
-    const NewItems = Items.sort((a, b) =>
-      a.price * (1 - a.discount / 100) > b.price * (1 - a.discount / 100)
-        ? 1
-        : -1
-    );
-    setItems(NewItems.reverse());
-  };
-  const FilterByCategory = (Category) => {
-    const NewItems = Products.filter((item) => item.Category === Category);
-    setItems(NewItems);
-
-  };
-
+import SingleProductWrapper from '../components/SingleProductWrapper'
+function Shop({allProducts,fetchAllProducts}) {
+const MinPrice = Math.min(...allProducts.Products.map((item) => item.price));
+const MaxPrice = Math.max(...allProducts.Products.map((item) => item.price));
+var Items = allProducts.Products
   useEffect(() => {
+    async function fetchProducts(){
+      try {
+        const Products = await axios.get('/products');
+        fetchAllProducts(Products);
+      } catch (error) {
+        console.log(error);
+        fetchAllProducts([]);
+      }
+    }
+    fetchProducts();
 
-   function AllProducts(){
-    axios.get('/products')
-    .then(allProducts =>{
-        props.fetchAllProducts(allProducts.data)
-    }).catch(error =>{
-        props.fetchAllProducts([]);
-    })
-   }
-   
-   AllProducts();
-
-   console.log(props);
-   console.log(Items)
-  }, [Items]);
+  }, []);
   return (
     <>
       <SubNavBar />
@@ -77,8 +45,7 @@ function Shop(props) {
                             <a href="#">All</a>
                           </li>
                           <li>
-                            <button
-                              onClick={() => FilterByCategory("Bodysuits")}
+                            <button onClick={(e)=> console.log(allProducts)}
                             >
                               Bodysuits
                             </button>
@@ -234,7 +201,7 @@ function Shop(props) {
                     </div>
                   </div>
                 </div>
-                {/* End Of Filtering by price Section */}
+                {/* End Of Filtering by price Section ${MinPrice} - ${MaxPrice} */}
                 {/* Filtering by color Section */}
                 <div className="widget color mb-50">
                   <p className="widget-title2 mb-30">Color</p>
@@ -312,17 +279,21 @@ function Shop(props) {
                           <span>{Items.length}</span> products found
                         </p>
                       </div>
-                      {/* Sorting the products section*/}
+                      {/* Sorting the products section {Items.length}*/}
                       <div className="product-sorting d-flex">
                         <p>Sort by:</p>
                         <form action="#" method="get">
                           <select name="select" id="sortByselect">
                             <option value="value">Newest</option>
-                            <option value="value" onChange={SortByLowest}>
-                              Price: {MinPrice} - {MaxPrice}
-                            </option>
-                            <option value="value" onChange={SortByHighest}>
+                            <option value="value" >
                               Price: {MaxPrice} - {MinPrice}
+                            </option>
+                            {
+                              /** onChange={/*SortByHighest*/
+                              }
+                            
+                            <option value="value" >
+                              Price: Price: {MaxPrice} - {MinPrice}
                             </option>
                           </select>
                           <input type="submit" className="d-none" value="" />
@@ -332,11 +303,13 @@ function Shop(props) {
                     </div>
                   </div>
                 </div>
-                {/* The products container */}
+              
                 <div className="row">
-                  {Items.map((item) => (
-                    <SingleProductWrapper Product={item} key={item._id} />
-                  ))}
+                   {/* The products container */
+                    Items.map((item) => (
+                      <SingleProductWrapper Product={item} key={item._id} />
+                    ))
+                 }
                 </div>
                 {/* End of The products container */}
               </div>

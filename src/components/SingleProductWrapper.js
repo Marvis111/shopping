@@ -1,5 +1,6 @@
 import React from "react";
-import {  Link, useNavigate } from "react-router-dom";
+import {  Link,} from "react-router-dom";
+
 function SingleProductWrapper({ Product }) {
  // const navigate = useNavigate();
   const PriceAfterDiscount = Product.price * (1 - Product.discount / 100);
@@ -7,8 +8,8 @@ function SingleProductWrapper({ Product }) {
     <div className="col-12 col-sm-6 col-lg-4">
       <div className="single-product-wrapper">
         <div className="product-img">
-          <img src={Product.img.Front} alt="" />
-          <img className="hover-img" src={Product.img.Hover} alt="" />
+          <img src={Product['img'].Front} alt="Front Image" />
+          <img className="hover-img" src={Product['img'].Hover} alt="" />
           {Product.discount > 0 && (
             <div className="product-badge offer-badge">
               <span>{Product.discount}%</span>
@@ -36,7 +37,7 @@ function SingleProductWrapper({ Product }) {
 
           <div className="hover-content">
             <div className="add-to-cart-btn">
-                <Link to={`/Product/${Product.id}`} className="btn essence-btn">View the Product</Link>
+                <Link to={`/Product/${Product._id}`} className="btn essence-btn">View the Product</Link>
             </div>
           </div>
         </div>
